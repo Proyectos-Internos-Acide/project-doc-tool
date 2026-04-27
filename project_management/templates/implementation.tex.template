@@ -1,0 +1,438 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, shapes.geometric, fit, backgrounds}
+\usepackage{helvet}              % Fuente Helvetica (equivalente a Arial)
+\usepackage{setspace}            % Control de interlineado
+\usepackage{etoolbox}            % Hooks para entornos
+\usepackage{caption}             % Control de captions
+\usepackage{pdflscape}           % P\'aginas horizontales (rotadas en visor PDF)
+\captionsetup{justification=raggedright, singlelinecheck=false, position=above}
+
+% --- Estilos globales ---
+\renewcommand{\familydefault}{\sfdefault}   % Arial/Helvetica como fuente principal
+\onehalfspacing                              % Interlineado 1.5
+\geometry{margin=2.5cm}
+\setlength{\tabcolsep}{3pt}
+\setlength{\parskip}{6pt}                   % Espacio entre p\'arrafos
+\setlength{\parindent}{0pt}                  % Sin sangr\'ia de primera l\'inea
+
+% ===========================================================================
+% INDENTACI\'ON JER\'ARQUICA (toggle: true/false)
+% ===========================================================================
+\newif\ifhierarchicalindent
+\hierarchicalindenttrue   % <-- Cambiar a \hierarchicalindentfalse para desactivar
+
+% --- Dimensiones de la jerarqu\'ia ---
+\newlength{\secIndent}            \setlength{\secIndent}{0cm}
+\newlength{\subsecIndent}         \setlength{\subsecIndent}{0.7cm}
+\newlength{\subsubsecIndent}      \setlength{\subsubsecIndent}{1.4cm}
+\newlength{\listIndentExtra}      \setlength{\listIndentExtra}{0.5cm}
+\newlength{\currentindent}        \setlength{\currentindent}{0cm}
+\newlength{\listlabelindent}      \setlength{\listlabelindent}{0.5cm}
+
+\ifhierarchicalindent
+  \titlespacing*{\section}{\secIndent}{18pt plus 4pt minus 2pt}{8pt plus 2pt minus 1pt}
+  \titlespacing*{\subsection}{\subsecIndent}{14pt plus 3pt minus 2pt}{6pt plus 2pt minus 1pt}
+  \titlespacing*{\subsubsection}{\subsubsecIndent}{10pt plus 2pt minus 1pt}{4pt plus 1pt minus 1pt}
+
+  \titleformat{\section}
+    {\normalsize\bfseries\color{primary}}{\thesection.}{0.5em}{}
+    [\titlerule\global\leftskip=\secIndent\relax
+     \global\currentindent=\secIndent\relax
+     \global\listlabelindent=\dimexpr\secIndent+\listIndentExtra\relax]
+  \titleformat{\subsection}
+    {\normalsize\bfseries\color{primary}}{\thesubsection}{0.5em}{}
+    [\global\leftskip=\subsecIndent\relax
+     \global\currentindent=\subsecIndent\relax
+     \global\listlabelindent=\dimexpr\subsecIndent+\listIndentExtra\relax]
+  \titleformat{\subsubsection}
+    {\normalsize\bfseries\color{primary}}{\thesubsubsection}{0.5em}{}
+    [\global\leftskip=\subsubsecIndent\relax
+     \global\currentindent=\subsubsecIndent\relax
+     \global\listlabelindent=\dimexpr\subsubsecIndent+\listIndentExtra\relax]
+
+  \setlist[itemize,1]{labelindent=\listlabelindent, leftmargin=*, labelsep=0.3cm, topsep=2pt}
+  \setlist[enumerate,1]{labelindent=\listlabelindent, leftmargin=*, labelsep=0.3cm, topsep=2pt}
+  \setlist[itemize,2]{labelsep=0.3cm, topsep=2pt}
+  \setlist[enumerate,2]{labelsep=0.3cm, topsep=2pt}
+
+  \AtBeginEnvironment{tabularx}{\par\global\leftskip=0pt\relax\noindent}
+  \AtBeginEnvironment{longtable}{\par\global\leftskip=0pt\relax\noindent}
+  \AtBeginEnvironment{table}{\global\leftskip=0pt\relax}
+  \AtBeginEnvironment{figure}{\global\leftskip=0pt\relax}
+\else
+  \titlespacing*{\section}{0pt}{18pt plus 4pt minus 2pt}{8pt plus 2pt minus 1pt}
+  \titlespacing*{\subsection}{0pt}{14pt plus 3pt minus 2pt}{6pt plus 2pt minus 1pt}
+  \titlespacing*{\subsubsection}{0pt}{10pt plus 2pt minus 1pt}{4pt plus 1pt minus 1pt}
+
+  \titleformat{\section}{\normalsize\bfseries\color{primary}}{\thesection.}{0.5em}{}[\titlerule]
+  \titleformat{\subsection}{\normalsize\bfseries\color{primary}}{\thesubsection}{0.5em}{}
+  \titleformat{\subsubsection}{\normalsize\bfseries\color{primary}}{\thesubsubsection}{0.5em}{}
+
+  \AtBeginEnvironment{tabularx}{\noindent}
+\fi
+
+% --- Estilo de p\'agina ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Informe de Implementaci\'on -- {{COMPANY_NAME}}\\
+\small Contrato: {{PROJECT_CODE}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\setlength{\headheight}{28pt}
+\fancyfoot[R]{\thepage}
+
+% Estilo para car\'atula: header visible, sin n\'umero de p\'agina
+\fancypagestyle{coverstyle}{%
+  \fancyhf{}%
+  \fancyhead[L]{\small Informe de Implementaci\'on -- {{COMPANY_NAME}}\\
+  \small Contrato: {{PROJECT_CODE}}}%
+  \renewcommand{\headrulewidth}{0.4pt}%
+  \fancyfoot{}%
+}
+
+% --- Colores ---
+\definecolor{primary}{HTML}{{{PRIMARY_COLOR}}}
+\definecolor{accent}{HTML}{{{ACCENT_COLOR}}}
+\definecolor{success}{HTML}{{{SUCCESS_COLOR}}}
+\definecolor{warn}{HTML}{{{WARN_COLOR}}}
+
+\begin{document}
+
+% --- Portada (imagen a p\'agina completa, sin m\'argenes) ---
+\newpage
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture, overlay]
+    \node[inner sep=0pt] at (current page.center) {%
+        \includegraphics[width=\paperwidth, height=\paperheight]{img/{{COVER_IMAGE}}}%
+    };
+\end{tikzpicture}
+\clearpage
+
+% --- Car\'atula ---
+\begin{titlepage}
+\thispagestyle{coverstyle}
+\centering
+
+\vspace*{0.5cm}
+{\large\bfseries INFORME DE IMPLEMENTACI\'ON}\\[0.8cm]
+{\normalsize\bfseries\MakeUppercase{{{PROJECT_DESCRIPTION}}}}\\[0.8cm]
+
+% Logo de la empresa
+\includegraphics[width=0.22\textwidth]{img/{{LOGO_IMAGE}}}\\[0.8cm]
+
+% Tabla de datos del proyecto
+\begin{tabular}{r@{\quad:\quad}l}
+    \toprule
+    \textbf{ENTIDAD SOLICITANTE} & \textbf{{{ENTITY_NAME_UPPER}}} \\
+    \midrule
+    \textbf{RUC} & \textbf{{{RUC}}} \\
+    \midrule
+    \textbf{C\'ODIGO DE PROYECTO} & \textbf{{{PROJECT_CODE}}} \\
+    \midrule
+    \textbf{FECHA DE INFORME} & \textbf{{{REPORT_DATE_START}} -- {{REPORT_DATE_END}}} \\
+    \bottomrule
+\end{tabular}
+
+\vspace{1cm}
+
+% Firmas - fila 1: dos firmantes
+\begin{tabular}{p{7cm}p{7cm}}
+    \centering\vspace{1cm}\rule{5cm}{0.4pt} &
+    \centering\vspace{1cm}\rule{5cm}{0.4pt} \tabularnewline[4pt]
+    \centering\textbf{\MakeUppercase{{{COORDINATOR_NAME}}}} &
+    \centering\textbf{\MakeUppercase{{{CONSULTANT_NAME}}}} \tabularnewline
+    \centering Coordinador General &
+    \centering Consultor del proyecto \tabularnewline
+\end{tabular}
+
+\vspace{0.5cm}
+
+% Firmas - fila 2: un firmante centrado
+\vspace{1.2cm}
+\rule{5cm}{0.4pt}\\[4pt]
+\textbf{\MakeUppercase{{{CO_CONSULTANT_NAME}}}}\\
+Co-Consultor
+
+\vspace{1cm}
+{\large\bfseries {{CITY}} -- {{COUNTRY}}}\\
+{\large {{YEAR}}}
+\end{titlepage}
+
+% Paginaci\'on comienza desde el \'indice
+\setcounter{page}{1}
+
+\tableofcontents
+\newpage
+\listoffigures
+\listoftables
+\newpage
+
+% =============================================================================
+% SECCI\'ON 1: IMPLEMENTACI\'ON
+% =============================================================================
+\section{Implementaci\'on}
+
+\subsection{An\'alisis Inicial de Procesos y Necesidades}
+
+% TODO: Describir el proceso de an\'alisis inicial.
+% Fuente: Informe de Diagn\'ostico de la empresa.
+% Puntos a cubrir:
+% - Entrevistas con la gerencia y personal operativo
+% - Identificaci\'on de puntos de dolor en los procesos manuales
+% - Validaci\'on de objetivos del proyecto
+% - Formalizaci\'on de necesidades en requerimientos funcionales
+
+\subsection{Requerimientos Funcionales y No Funcionales}
+
+\subsubsection{Requerimientos Funcionales}
+
+\begin{tabularx}{\textwidth}{clX}
+    \toprule
+    \textbf{C\'odigo} & \textbf{Requerimiento} & \textbf{Descripci\'on} \\
+    \midrule
+    RF-001 & {[Requerimiento]} & {[Descripci\'on]} \\
+    RF-002 & {[Requerimiento]} & {[Descripci\'on]} \\
+    RF-003 & {[Requerimiento]} & {[Descripci\'on]} \\
+    RF-004 & {[Requerimiento]} & {[Descripci\'on]} \\
+    RF-005 & {[Requerimiento]} & {[Descripci\'on]} \\
+    \bottomrule
+\end{tabularx}
+
+\subsubsection{Requerimientos No Funcionales}
+
+\begin{tabularx}{\textwidth}{clX}
+    \toprule
+    \textbf{C\'odigo} & \textbf{Requerimiento} & \textbf{Descripci\'on} \\
+    \midrule
+    RNF-01 & {[Requerimiento]} & {[Descripci\'on]} \\
+    RNF-02 & {[Requerimiento]} & {[Descripci\'on]} \\
+    RNF-03 & {[Requerimiento]} & {[Descripci\'on]} \\
+    \bottomrule
+\end{tabularx}
+
+\subsection{Dise\~no del Sistema de Gesti\'on Digital}
+
+\subsubsection{Casos de Uso}
+
+% TODO: Insertar diagrama de casos de uso generado con PlantUML.
+% \begin{figure}[H]
+%     \centering
+%     \caption{Diagrama de casos de uso del sistema}
+%     \label{fig:use_case}
+%     \includegraphics[width=0.85\textwidth]{img/use_case.png}
+% \end{figure}
+
+\subsubsection{Arquitectura del Sistema}
+
+% TODO: Describir la arquitectura. Incluir diagrama TikZ o imagen.
+% Fuente: Informe de Plan de Implementaci\'on.
+
+\subsubsection{Dise\~no de la Experiencia e Interfaz de Usuario (UX/UI)}
+
+% TODO: Describir personalizaci\'on de la interfaz.
+
+\subsubsection{Configuraci\'on de la Base de Datos}
+
+% TODO: Describir la estructura de datos configurada.
+
+\subsubsection{Modelos de Datos}
+
+% TODO: Insertar diagrama ER generado con PlantUML.
+% \begin{figure}[H]
+%     \centering
+%     \caption{Modelo de datos del sistema}
+%     \label{fig:er_diagram}
+%     \includegraphics[width=\textwidth]{img/data_model.png}
+% \end{figure}
+
+\subsection{Selecci\'on y Aplicaci\'on de Tecnolog\'ias}
+
+\subsubsection{Backend}
+
+% TODO: Odoo 19 (saas-19.1), Python, XML-RPC API
+
+\subsubsection{Frontend}
+
+% TODO: Odoo Website, eCommerce, Self-Ordering, Portal
+
+\subsubsection{Base de Datos}
+
+% TODO: PostgreSQL (gestionado por Odoo SaaS)
+
+\subsubsection{Infraestructura y Despliegue}
+
+% TODO: Odoo.sh / SaaS, dominio, configuraci\'on DNS
+
+\subsection{Desarrollo Iterativo Basado en Sprints}
+
+% TODO: Describir el proceso de sprints.
+% Fuente: Sprint Reviews y Product Increments de cada sprint.
+
+\subsubsection{Sprint 1}
+
+% TODO: Resumen del Sprint 1
+
+\subsubsection{Sprint 2}
+
+% TODO: Resumen del Sprint 2
+
+\subsubsection{Sprint 3}
+
+% TODO: Resumen del Sprint 3
+
+% TODO: Agregar m\'as sprints seg\'un corresponda
+
+\subsection{M\'odulos del Sistema y su Integraci\'on}
+
+% TODO: Describir cada m\'odulo configurado con capturas de pantalla.
+% Incluir: Hotel, Agencia, Restaurante, CRM, Web, Compras, etc.
+
+% =============================================================================
+% SECCI\'ON 2: RESULTADOS
+% =============================================================================
+\section{Resultados}
+
+% TODO: Completar con m\'etricas reales del proyecto.
+
+\subsection{M\'etrica R1}
+
+% TODO: Nombre y descripci\'on de la m\'etrica
+
+\begin{tabularx}{\textwidth}{Xlll}
+    \toprule
+    \textbf{Indicador} & \textbf{Antes (manual)} & \textbf{Despu\'es (sistema)} & \textbf{Mejora} \\
+    \midrule
+    {[Indicador]} & {[Antes]} & {[Despu\'es]} & {[Mejora]} \\
+    \bottomrule
+\end{tabularx}
+
+\subsection{M\'etrica R2}
+
+% TODO: Nombre y descripci\'on de la m\'etrica
+
+\begin{tabularx}{\textwidth}{Xlll}
+    \toprule
+    \textbf{Indicador} & \textbf{Antes (manual)} & \textbf{Despu\'es (sistema)} & \textbf{Mejora} \\
+    \midrule
+    {[Indicador]} & {[Antes]} & {[Despu\'es]} & {[Mejora]} \\
+    \bottomrule
+\end{tabularx}
+
+\subsection{M\'etrica R3}
+
+% TODO: Nombre y descripci\'on de la m\'etrica
+
+\begin{tabularx}{\textwidth}{Xlll}
+    \toprule
+    \textbf{Indicador} & \textbf{Antes (manual)} & \textbf{Despu\'es (sistema)} & \textbf{Mejora} \\
+    \midrule
+    {[Indicador]} & {[Antes]} & {[Despu\'es]} & {[Mejora]} \\
+    \bottomrule
+\end{tabularx}
+
+% =============================================================================
+% SECCI\'ON 3: PLAN DE CAPACITACIONES
+% =============================================================================
+\section{Plan de Capacitaciones}
+
+\subsection{Objetivo de la Capacitaci\'on}
+
+% TODO: Describir el objetivo
+
+\subsection{Alcance}
+
+% TODO: A qui\'enes va dirigida
+
+\subsection{Metodolog\'ia}
+
+% TODO: Sesiones din\'amicas, ejercicios pr\'acticos, etc.
+
+\subsection{Recursos Utilizados}
+
+% TODO: Materiales, equipos, infraestructura
+
+\subsection{Cronograma de Capacitaciones}
+
+\begin{tabularx}{\textwidth}{lXllc}
+    \toprule
+    \textbf{Sesi\'on} & \textbf{Tema Principal} & \textbf{Dirigido a} & \textbf{Horas} & \textbf{Mes} \\
+    \midrule
+    Sesi\'on 1 & {[Tema]} & {[Audiencia]} & 4 & {[Mes]} \\
+    Sesi\'on 2 & {[Tema]} & {[Audiencia]} & 4 & {[Mes]} \\
+    Sesi\'on 3 & {[Tema]} & {[Audiencia]} & 4 & {[Mes]} \\
+    \bottomrule
+\end{tabularx}
+
+\subsection{Desarrollo de las Sesiones}
+
+\subsubsection{Sesi\'on 1}
+
+% TODO: Describir contenido impartido y evidencia
+
+\subsubsection{Sesi\'on 2}
+
+% TODO: Describir contenido impartido y evidencia
+
+\subsubsection{Sesi\'on 3}
+
+% TODO: Describir contenido impartido y evidencia
+
+\subsection{Evaluaci\'on de la Adopci\'on}
+
+% TODO: Resultados de la evaluaci\'on
+
+% =============================================================================
+% SECCI\'ON 4: CONCLUSIONES
+% =============================================================================
+\section{Conclusiones}
+
+% TODO: 3-5 p\'arrafos de conclusiones
+
+% =============================================================================
+% SECCI\'ON 5: RECOMENDACIONES
+% =============================================================================
+\section{Recomendaciones}
+
+% TODO: 3-5 recomendaciones
+
+% =============================================================================
+% SECCI\'ON 6: ANEXOS
+% =============================================================================
+\section{Anexos}
+
+\subsection{Presupuesto}
+
+% TODO: Tabla de presupuesto
+
+\subsection{Cronograma de Implementaci\'on}
+
+% TODO: Tabla de cronograma por sprints
+
+\subsection{KPIs del Plan}
+
+% TODO: Tabla de KPIs
+
+\subsection{M\'odulos Instalados}
+
+% TODO: Lista de m\'odulos de Odoo
+
+\subsection{Evidencia Visual}
+
+{{EVIDENCE_IMAGES}}
+
+\end{document}

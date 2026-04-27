@@ -1,0 +1,13 @@
+[project]
+name = "project-doc-tool"
+version = "0.1.0"
+description = "Document generation tool for standardized company reports (LaTeX/Markdown to PDF)"
+requires-python = ">=3.13"
+dependencies = [
+    "python-dotenv>=1.2.1",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+]

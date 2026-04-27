@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.env
+.venv/
+env/
+venv/
+.DS_Store
+.idea/
+.vscode/
+project_management/generated/*
+!project_management/generated/.gitkeep
+!project_management/generated/ai_context.md
