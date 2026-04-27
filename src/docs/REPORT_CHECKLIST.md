@@ -17,7 +17,7 @@ Estos documentos son la fuente de contenido para redactar el informe:
 
 ## 2. Datos de la Empresa Beneficiaria
 
-Editar en `project_management/defaults/config.py`:
+Editar en `src/defaults/config.py`:
 
 | Campo | Variable en config.py | Ejemplo |
 |-------|----------------------|---------|
@@ -131,12 +131,12 @@ Para esto necesitas:
 
 ### Paso 1: Editar config.py
 
-Abre `project_management/defaults/config.py` y completa todos los campos de las secciones 2-6 de este checklist.
+Abre `src/defaults/config.py` y completa todos los campos de las secciones 2-6 de este checklist.
 
 ### Paso 2: Crear el reporte desde la plantilla
 
 ```bash
-uv run python project_management/scripts/create_report.py implementation \
+uv run python src/scripts/create_report.py implementation \
   --format latex \
   --start-date 2026-01-02 --end-date 2026-02-28
 ```
@@ -145,7 +145,7 @@ uv run python project_management/scripts/create_report.py implementation \
 
 Copia las imagenes de la seccion 7 a:
 ```
-project_management/generated/reports/implementation/img/
+src/generated/reports/implementation/img/
 ```
 
 ### Paso 4: Crear y generar diagramas PlantUML
@@ -160,7 +160,7 @@ Usa los documentos de entrada (seccion 1) como fuente.
 ### Paso 6: Compilar
 
 ```bash
-cd project_management/generated/reports/implementation/
+cd src/generated/reports/implementation/
 pdflatex -interaction=nonstopmode implementation.tex
 pdflatex -interaction=nonstopmode implementation.tex
 ```

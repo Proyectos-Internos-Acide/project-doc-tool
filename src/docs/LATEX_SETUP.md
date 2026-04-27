@@ -178,7 +178,7 @@ See `STYLE_GUIDE.md` for the full standard preamble and style configurations.
 ### Single .tex file (e.g., sprint reports)
 
 ```bash
-cd project_management/generated/reports/<report_name>/
+cd src/generated/reports/<report_name>/
 pdflatex -interaction=nonstopmode <file>.tex
 ```
 
@@ -187,7 +187,7 @@ pdflatex -interaction=nonstopmode <file>.tex
 Reports using `\tableofcontents`, `\listoffigures`, or `\listoftables` need **2 passes**:
 
 ```bash
-cd project_management/generated/reports/implementation/
+cd src/generated/reports/implementation/
 pdflatex -interaction=nonstopmode implementation.tex
 pdflatex -interaction=nonstopmode implementation.tex   # 2nd pass resolves refs
 ```
@@ -197,7 +197,7 @@ pdflatex -interaction=nonstopmode implementation.tex   # 2nd pass resolves refs
 Generate PNG images from `.puml` source files before compiling:
 
 ```bash
-cd project_management/generated/reports/implementation/
+cd src/generated/reports/implementation/
 plantuml -tpng diagrams/use_case.puml -o "$(pwd)/img/"
 plantuml -tpng diagrams/sequence_tour.puml -o "$(pwd)/img/"
 plantuml -tpng diagrams/sequence_reservation.puml -o "$(pwd)/img/"

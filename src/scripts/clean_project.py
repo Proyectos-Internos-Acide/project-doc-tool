@@ -6,15 +6,15 @@ except .gitkeep. Use this when switching to a new company/project.
 
 Usage:
     # Preview what will be deleted (dry run)
-    uv run python project_management/scripts/clean_project.py
+    uv run python src/scripts/clean_project.py
 
     # Actually delete everything
-    uv run python project_management/scripts/clean_project.py --confirm
+    uv run python src/scripts/clean_project.py --confirm
 
     # Clean only a specific area
-    uv run python project_management/scripts/clean_project.py --only reports
-    uv run python project_management/scripts/clean_project.py --only sprints
-    uv run python project_management/scripts/clean_project.py --only context
+    uv run python src/scripts/clean_project.py --only reports
+    uv run python src/scripts/clean_project.py --only sprints
+    uv run python src/scripts/clean_project.py --only context
 """
 
 import shutil

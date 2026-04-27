@@ -220,7 +220,7 @@ chmod +x ~/.local/bin/plantuml
 
 ### Generation
 ```bash
-cd project_management/generated/reports/implementation
+cd src/generated/reports/implementation
 plantuml -tpng diagrams/diagram_name.puml -o /absolute/path/to/img/
 ```
 

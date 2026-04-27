@@ -8,19 +8,19 @@ context file that can be:
 
 Usage:
     # Generate context file only (paste into your AI editor)
-    uv run python project_management/scripts/prepare_report_context.py
+    uv run python src/scripts/prepare_report_context.py
 
     # With Odoo data
-    uv run python project_management/scripts/prepare_report_context.py \
+    uv run python src/scripts/prepare_report_context.py \
       --start-date 2026-01-02 --end-date 2026-02-28
 
     # With input documents
-    uv run python project_management/scripts/prepare_report_context.py \
+    uv run python src/scripts/prepare_report_context.py \
       --diagnostico ~/docs/diagnostico.txt \
       --plan ~/docs/plan_implementacion.txt
 
     # Auto-generate with Claude API
-    uv run python project_management/scripts/prepare_report_context.py \
+    uv run python src/scripts/prepare_report_context.py \
       --auto --start-date 2026-01-02 --end-date 2026-02-28
 """
 

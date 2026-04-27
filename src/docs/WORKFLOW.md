@@ -14,14 +14,14 @@ Each sprint produces two documents (LaTeX or Markdown):
 Basic (LaTeX, no Odoo query):
 
 ```bash
-uv run python project_management/scripts/create_sprint.py 4 \
+uv run python src/scripts/create_sprint.py 4 \
   --period "10 de Febrero, 2026 -- 21 de Febrero, 2026"
 ```
 
 With Odoo query and markdown format:
 
 ```bash
-uv run python project_management/scripts/create_sprint.py 4 \
+uv run python src/scripts/create_sprint.py 4 \
   --period "10 de Febrero, 2026 -- 21 de Febrero, 2026" \
   --start-date 2026-02-10 --end-date 2026-02-22 \
   --format markdown
@@ -30,7 +30,7 @@ uv run python project_management/scripts/create_sprint.py 4 \
 With evidence images and PDF conversion:
 
 ```bash
-uv run python project_management/scripts/create_sprint.py 4 \
+uv run python src/scripts/create_sprint.py 4 \
   --period "10 de Febrero, 2026 -- 21 de Febrero, 2026" \
   --start-date 2026-02-10 --end-date 2026-02-22 \
   --format markdown --with-pdf \
@@ -99,16 +99,16 @@ Reference in Markdown:
 ### Step 4: Compile PDFs
 
 ```bash
-uv run python project_management/scripts/compile_sprint.py 4
-uv run python project_management/scripts/compile_sprint.py 4 --file sprint_review.tex
-uv run python project_management/scripts/compile_sprint.py 4 --file sprint_review.md
+uv run python src/scripts/compile_sprint.py 4
+uv run python src/scripts/compile_sprint.py 4 --file sprint_review.tex
+uv run python src/scripts/compile_sprint.py 4 --file sprint_review.md
 ```
 
 ### Step 5: Clean auxiliary files
 
 ```bash
-uv run python project_management/scripts/clean_sprint.py 4
-uv run python project_management/scripts/clean_sprint.py --all
+uv run python src/scripts/clean_sprint.py 4
+uv run python src/scripts/clean_sprint.py --all
 ```
 
 ## Post-Implementation Reports
@@ -127,9 +127,9 @@ Three report types are available for project completion:
 ### Create a report
 
 ```bash
-uv run python project_management/scripts/create_report.py implementation --format markdown
-uv run python project_management/scripts/create_report.py executive_summary --format latex
-uv run python project_management/scripts/create_report.py lessons_learned --format markdown \
+uv run python src/scripts/create_report.py implementation --format markdown
+uv run python src/scripts/create_report.py executive_summary --format latex
+uv run python src/scripts/create_report.py lessons_learned --format markdown \
   --start-date 2026-01-02 --end-date 2026-02-22 \
   --evidence "/path/to/img1.png,/path/to/img2.png"
 ```
@@ -139,8 +139,8 @@ uv run python project_management/scripts/create_report.py lessons_learned --form
 ### Compile a report
 
 ```bash
-uv run python project_management/scripts/compile_report.py implementation
-uv run python project_management/scripts/compile_report.py lessons_learned --file lessons_learned.md
+uv run python src/scripts/compile_report.py implementation
+uv run python src/scripts/compile_report.py lessons_learned --file lessons_learned.md
 ```
 
 Note: The implementation report uses `\tableofcontents` and requires 2 pdflatex passes (default).
@@ -150,7 +150,7 @@ Note: The implementation report uses `\tableofcontents` and requires 2 pdflatex 
 Preview what data would populate templates without creating files:
 
 ```bash
-uv run python project_management/scripts/query_odoo.py \
+uv run python src/scripts/query_odoo.py \
   --start-date 2026-01-26 --end-date 2026-02-01
 ```
 
@@ -163,7 +163,7 @@ uv run python project_management/scripts/query_odoo.py \
 
 ## Adapting for Other Projects
 
-1. Edit `project_management/defaults/config.py` — all project metadata is centralized there:
+1. Edit `src/defaults/config.py` — all project metadata is centralized there:
    company name, RUC, project code, people (coordinator, consultant, co-consultant),
    city, year, images (cover, logo), dates, colors.
 2. The templates use `{{PLACEHOLDER}}` tokens replaced by values in `config.py`.

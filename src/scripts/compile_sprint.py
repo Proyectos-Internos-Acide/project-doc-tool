@@ -2,9 +2,9 @@
 """Compile sprint files (LaTeX or Markdown) to PDF.
 
 Usage:
-    uv run python project_management/scripts/compile_sprint.py 4
-    uv run python project_management/scripts/compile_sprint.py 4 --file sprint_review.tex
-    uv run python project_management/scripts/compile_sprint.py 5 --file sprint_review.md
+    uv run python src/scripts/compile_sprint.py 4
+    uv run python src/scripts/compile_sprint.py 4 --file sprint_review.tex
+    uv run python src/scripts/compile_sprint.py 5 --file sprint_review.md
 """
 
 import subprocess

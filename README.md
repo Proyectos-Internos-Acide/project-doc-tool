@@ -176,47 +176,60 @@ dot -V                  # Graphviz, opcional
 
 ```bash
 # Crear carpeta del sprint (LaTeX)
-uv run python project_management/scripts/create_sprint.py 4 \
+uv run python src/scripts/create_sprint.py 4 \
   --period "10 de Febrero, 2026 -- 21 de Febrero, 2026"
 
 # Con consulta a Odoo + Markdown + PDF
-uv run python project_management/scripts/create_sprint.py 4 \
+uv run python src/scripts/create_sprint.py 4 \
   --period "10 de Febrero, 2026 -- 21 de Febrero, 2026" \
   --start-date 2026-02-10 --end-date 2026-02-22 \
   --format markdown --with-pdf
 
 # Compilar PDFs
-uv run python project_management/scripts/compile_sprint.py 4
+uv run python src/scripts/compile_sprint.py 4
 
 # Limpiar archivos auxiliares
-uv run python project_management/scripts/clean_sprint.py 4
+uv run python src/scripts/clean_sprint.py 4
 ```
 
 ### Reportes post-implementacion
 
 ```bash
 # Crear reporte
-uv run python project_management/scripts/create_report.py implementation --format latex
-uv run python project_management/scripts/create_report.py executive_summary --format latex
-uv run python project_management/scripts/create_report.py lessons_learned --format markdown
+uv run python src/scripts/create_report.py implementation --format latex
+uv run python src/scripts/create_report.py executive_summary --format latex
+uv run python src/scripts/create_report.py lessons_learned --format markdown
 
 # Compilar a PDF
-uv run python project_management/scripts/compile_report.py implementation
-uv run python project_management/scripts/compile_report.py lessons_learned --file lessons_learned.md
+uv run python src/scripts/compile_report.py implementation
+uv run python src/scripts/compile_report.py lessons_learned --file lessons_learned.md
 ```
 
 ### Consulta a Odoo (standalone)
 
 ```bash
-uv run python project_management/scripts/query_odoo.py \
+uv run python src/scripts/query_odoo.py \
   --start-date 2026-01-26 --end-date 2026-02-01
 ```
 
 Requiere un archivo `.env` con las credenciales de conexion a Odoo.
 
+## Documentos de ejemplo
+
+La carpeta `src/examples/` contiene documentos de referencia reales que sirven como guia de estilo y formato. Son indispensables para que un agente de IA o un usuario nuevo entienda la estructura, tono y nivel de detalle esperado en cada tipo de documento.
+
+| Carpeta | Contenido |
+|---|---|
+| `RESULTS_REPORT/` | Informes de implementacion completos (R1, R2, R3) y un informe de resultados de otra empresa como referencia cruzada |
+| `EXECUTIVE_SUMMARY/` | Resumen ejecutivo con logos institucionales |
+| `LEARNED_LESSONS/` | Documento de lecciones aprendidas |
+| `INDEXED_PHOTOS/` | Ejemplo de formato de fotos indexadas |
+
+Estos PDFs son la "fuente de verdad" del formato esperado. Los templates en `src/templates/` reproducen su estructura.
+
 ## Configuracion del proyecto
 
-Editar `project_management/defaults/config.py` para personalizar:
+Editar `src/defaults/config.py` para personalizar:
 
 - Nombre de empresa, RUC, representante legal
 - Codigo de proyecto y programa
@@ -234,9 +247,9 @@ project-doc-tool/
 ├── pyproject.toml
 ├── README.md
 ├── scripts/
-│   ├── install_linux.sh          # Instalador de dependencias para Arch Linux
-│   └── install_windows.ps1       # Instalador de dependencias para Windows
-└── project_management/
+│   ├── install_linux.sh            # Instalador de dependencias para Arch Linux
+│   └── install_windows.ps1         # Instalador de dependencias para Windows
+└── src/
     ├── defaults/
     │   └── config.py               # Metadata del proyecto y empresa
     ├── docs/
@@ -245,6 +258,11 @@ project-doc-tool/
     │   ├── STYLE_GUIDE.md          # Referencia de estilos LaTeX
     │   ├── REPORT_CHECKLIST.md     # Checklist de entregables
     │   └── AI_INSTRUCTIONS.md     # Instrucciones para agentes AI
+    ├── examples/                   # Documentos de referencia (PDFs reales)
+    │   ├── RESULTS_REPORT/         # Informes de implementacion R1-R3
+    │   ├── EXECUTIVE_SUMMARY/      # Resumen ejecutivo con logos
+    │   ├── LEARNED_LESSONS/        # Lecciones aprendidas
+    │   └── INDEXED_PHOTOS/         # Formato de fotos indexadas
     ├── helpers/
     │   ├── odoo_query.py           # Consultas XML-RPC a Odoo
     │   ├── renderer.py             # Renderizado de templates
@@ -256,7 +274,7 @@ project-doc-tool/
 
 ## Documentacion adicional
 
-- [WORKFLOW.md](project_management/docs/WORKFLOW.md) -- Flujo paso a paso
-- [LATEX_SETUP.md](project_management/docs/LATEX_SETUP.md) -- Instalacion detallada de LaTeX, Pandoc y PlantUML
-- [STYLE_GUIDE.md](project_management/docs/STYLE_GUIDE.md) -- Guia de estilos LaTeX
-- [REPORT_CHECKLIST.md](project_management/docs/REPORT_CHECKLIST.md) -- Checklist de entregables
+- [WORKFLOW.md](src/docs/WORKFLOW.md) -- Flujo paso a paso
+- [LATEX_SETUP.md](src/docs/LATEX_SETUP.md) -- Instalacion detallada de LaTeX, Pandoc y PlantUML
+- [STYLE_GUIDE.md](src/docs/STYLE_GUIDE.md) -- Guia de estilos LaTeX
+- [REPORT_CHECKLIST.md](src/docs/REPORT_CHECKLIST.md) -- Checklist de entregables

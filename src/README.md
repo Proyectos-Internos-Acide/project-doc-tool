@@ -21,11 +21,11 @@ Supports **LaTeX** and **Markdown** output. Markdown can be converted to PDF via
 
 ```bash
 # 1. Create sprint folder (LaTeX)
-uv run python project_management/scripts/create_sprint.py 4 \
+uv run python src/scripts/create_sprint.py 4 \
   --period "10 de Febrero, 2026 -- 21 de Febrero, 2026"
 
 # 1b. Or with Odoo query + Markdown + PDF
-uv run python project_management/scripts/create_sprint.py 4 \
+uv run python src/scripts/create_sprint.py 4 \
   --period "10 de Febrero, 2026 -- 21 de Febrero, 2026" \
   --start-date 2026-02-10 --end-date 2026-02-22 \
   --format markdown --with-pdf
@@ -33,33 +33,33 @@ uv run python project_management/scripts/create_sprint.py 4 \
 # 2. Edit the files and add screenshots to img/
 
 # 3. Compile PDFs
-uv run python project_management/scripts/compile_sprint.py 4
+uv run python src/scripts/compile_sprint.py 4
 
 # 4. Clean auxiliary files
-uv run python project_management/scripts/clean_sprint.py 4
+uv run python src/scripts/clean_sprint.py 4
 ```
 
 ### Post-implementation reports
 
 ```bash
 # Create report
-uv run python project_management/scripts/create_report.py lessons_learned --format markdown
+uv run python src/scripts/create_report.py lessons_learned --format markdown
 
 # Compile to PDF
-uv run python project_management/scripts/compile_report.py lessons_learned
+uv run python src/scripts/compile_report.py lessons_learned
 ```
 
 ### Standalone Odoo query
 
 ```bash
-uv run python project_management/scripts/query_odoo.py \
+uv run python src/scripts/query_odoo.py \
   --start-date 2026-01-26 --end-date 2026-02-01
 ```
 
 ## Folder Structure
 
 ```
-project_management/
+src/
 ├── README.md
 ├── docs/
 │   ├── WORKFLOW.md              # Full step-by-step workflow

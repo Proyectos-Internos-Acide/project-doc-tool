@@ -2,9 +2,9 @@
 """Create sprint folder structure with rendered templates.
 
 Usage:
-    uv run python project_management/scripts/create_sprint.py 4 --period "10 de Febrero, 2026 -- 21 de Febrero, 2026"
-    uv run python project_management/scripts/create_sprint.py 5 --period "26 Ene -- 31 Ene" --start-date 2026-01-26 --end-date 2026-02-01 --format markdown
-    uv run python project_management/scripts/create_sprint.py 5 --period "26 Ene -- 31 Ene" --format markdown --with-pdf --evidence img1.png,img2.png
+    uv run python src/scripts/create_sprint.py 4 --period "10 de Febrero, 2026 -- 21 de Febrero, 2026"
+    uv run python src/scripts/create_sprint.py 5 --period "26 Ene -- 31 Ene" --start-date 2026-01-26 --end-date 2026-02-01 --format markdown
+    uv run python src/scripts/create_sprint.py 5 --period "26 Ene -- 31 Ene" --format markdown --with-pdf --evidence img1.png,img2.png
 """
 
 import shutil
@@ -254,7 +254,7 @@ def create(
     typer.secho(f"  1. Edit the .{ext} files to fill in sprint content")
     typer.secho("  2. Place screenshots in the img/ folder")
     typer.secho(
-        f"  3. Run: uv run python project_management/scripts/compile_sprint.py {sprint_number}"
+        f"  3. Run: uv run python src/scripts/compile_sprint.py {sprint_number}"
     )
 
 

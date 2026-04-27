@@ -2,9 +2,9 @@
 """Standalone Odoo query for previewing report data.
 
 Usage:
-    uv run python project_management/scripts/query_odoo.py --start-date 2026-01-26 --end-date 2026-02-01
-    uv run python project_management/scripts/query_odoo.py --start-date 2026-01-02 --end-date 2026-02-22
-    uv run python project_management/scripts/query_odoo.py --start-date 2026-01-02 --end-date 2026-02-22 --system
+    uv run python src/scripts/query_odoo.py --start-date 2026-01-26 --end-date 2026-02-01
+    uv run python src/scripts/query_odoo.py --start-date 2026-01-02 --end-date 2026-02-22
+    uv run python src/scripts/query_odoo.py --start-date 2026-01-02 --end-date 2026-02-22 --system
 """
 
 import sys

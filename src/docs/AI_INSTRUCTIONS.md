@@ -14,15 +14,15 @@ Odoo 19 en empresas beneficiarias.
 Antes de generar contenido, el agente DEBE leer estos archivos:
 
 ### Configuracion y estilo
-1. `project_management/defaults/config.py` — Datos de la empresa, proyecto, personas
-2. `project_management/docs/STYLE_GUIDE.md` — Formato LaTeX completo
-3. `project_management/docs/REPORT_CHECKLIST.md` — Lista de inputs necesarios
+1. `src/defaults/config.py` — Datos de la empresa, proyecto, personas
+2. `src/docs/STYLE_GUIDE.md` — Formato LaTeX completo
+3. `src/docs/REPORT_CHECKLIST.md` — Lista de inputs necesarios
 
 ### Plantilla
-4. `project_management/templates/implementation.tex.template` — Estructura del informe
+4. `src/templates/implementation.tex.template` — Estructura del informe
 
 ### Reporte actual (si existe)
-5. `project_management/generated/reports/implementation/implementation.tex` — Archivo a editar
+5. `src/generated/reports/implementation/implementation.tex` — Archivo a editar
 
 ## Documentos de Entrada
 
@@ -89,7 +89,7 @@ skinparam roundCorner 8
 ### Paso 5: Generar PNGs y compilar
 
 ```bash
-cd project_management/generated/reports/implementation/
+cd src/generated/reports/implementation/
 for f in diagrams/*.puml; do plantuml -tpng "$f" -o "$(pwd)/img/"; done
 pdflatex -interaction=nonstopmode implementation.tex
 pdflatex -interaction=nonstopmode implementation.tex
@@ -202,8 +202,8 @@ Cada metrica R1-R6 debe tener:
 ## Ejemplo de Uso con Claude Code
 
 ```
-usuario> Lee los archivos de project_management/docs/AI_INSTRUCTIONS.md y
-         project_management/docs/REPORT_CHECKLIST.md, luego lee el informe
+usuario> Lee los archivos de src/docs/AI_INSTRUCTIONS.md y
+         src/docs/REPORT_CHECKLIST.md, luego lee el informe
          de diagnostico en ~/docs/diagnostico.pdf y completa todas las
          secciones TODO del informe de implementacion.
 ```

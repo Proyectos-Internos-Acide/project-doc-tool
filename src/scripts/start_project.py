@@ -5,7 +5,7 @@ Main entry point for generating implementation reports. Detects existing
 project state and guides the user through setup or continuation.
 
 Usage:
-    uv run python project_management/scripts/start_project.py
+    uv run python src/scripts/start_project.py
 """
 
 import shutil

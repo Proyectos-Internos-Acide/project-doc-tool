@@ -2,9 +2,9 @@
 """Compile report files (LaTeX or Markdown) to PDF.
 
 Usage:
-    uv run python project_management/scripts/compile_report.py implementation
-    uv run python project_management/scripts/compile_report.py lessons_learned --file lessons_learned.md
-    uv run python project_management/scripts/compile_report.py implementation --passes 2
+    uv run python src/scripts/compile_report.py implementation
+    uv run python src/scripts/compile_report.py lessons_learned --file lessons_learned.md
+    uv run python src/scripts/compile_report.py implementation --passes 2
 """
 
 import subprocess

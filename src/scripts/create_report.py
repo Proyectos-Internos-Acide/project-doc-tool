@@ -2,10 +2,10 @@
 """Create post-implementation report with rendered templates.
 
 Usage:
-    uv run python project_management/scripts/create_report.py implementation --format markdown
-    uv run python project_management/scripts/create_report.py executive_summary --format latex
-    uv run python project_management/scripts/create_report.py lessons_learned
-    uv run python project_management/scripts/create_report.py implementation --start-date 2026-01-02 --end-date 2026-02-22
+    uv run python src/scripts/create_report.py implementation --format markdown
+    uv run python src/scripts/create_report.py executive_summary --format latex
+    uv run python src/scripts/create_report.py lessons_learned
+    uv run python src/scripts/create_report.py implementation --start-date 2026-01-02 --end-date 2026-02-22
 """
 
 import shutil
@@ -238,7 +238,7 @@ def create(
     typer.secho(f"  1. Edit the .{ext} file to fill in report content")
     typer.secho("  2. Place screenshots/evidence in the img/ folder")
     typer.secho(
-        f"  3. Run: uv run python project_management/scripts/compile_report.py {report_type}"
+        f"  3. Run: uv run python src/scripts/compile_report.py {report_type}"
     )
 
 

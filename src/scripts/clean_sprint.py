@@ -2,8 +2,8 @@
 """Clean LaTeX auxiliary files from sprint folders.
 
 Usage:
-    uv run python project_management/scripts/clean_sprint.py 4
-    uv run python project_management/scripts/clean_sprint.py --all
+    uv run python src/scripts/clean_sprint.py 4
+    uv run python src/scripts/clean_sprint.py --all
 """
 import sys
 import os
