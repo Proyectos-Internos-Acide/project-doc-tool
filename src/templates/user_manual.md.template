@@ -1,0 +1,56 @@
+---
+title: "MANUAL DE USUARIO"
+subtitle: "{{SYSTEM_NAME}}"
+author: "{{COMPANY_NAME}}"
+date: "{{REPORT_DATE}}"
+geometry: margin=2.5cm
+toc: true
+toc-depth: 3
+numbersections: true
+lang: es
+fontsize: 12pt
+header-includes:
+  - \usepackage{fancyhdr}
+  - \pagestyle{fancy}
+  - \fancyhead[L]{Manual de Usuario}
+  - \fancyhead[R]{{{SYSTEM_NAME}}}
+  - \fancyfoot[C]{\thepage}
+---
+
+\newpage
+
+# Introduccion
+
+## Proposito del documento
+
+El presente documento tiene como objetivo guiar a los usuarios del sistema **{{SYSTEM_NAME}}** en el uso correcto de cada modulo y funcionalidad disponible. Esta dirigido a todos los roles que interactuan con la plataforma.
+
+## Alcance
+
+Este manual cubre las funcionalidades disponibles en la version actual del sistema, incluyendo:
+
+{{MODULE_LIST}}
+
+## Roles del sistema
+
+{{ROLES_TABLE}}
+
+---
+
+\newpage
+
+{{MODULES_CONTENT}}
+
+---
+
+\newpage
+
+# Anexos
+
+## Glosario de terminos
+
+{{GLOSSARY}}
+
+## Preguntas frecuentes
+
+{{FAQ}}

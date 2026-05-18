@@ -78,7 +78,7 @@ PANDOC_ARGS = [
     "--highlight-style=tango",
 ]
 
-REPORT_TYPES = ["implementation", "executive_summary", "lessons_learned"]
+REPORT_TYPES = ["implementation", "executive_summary", "lessons_learned", "user_manual"]
 
 # Backward compatibility aliases
 PROJECT_ENTITY = COMPANY_NAME
